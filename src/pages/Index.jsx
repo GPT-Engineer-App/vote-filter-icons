@@ -12,9 +12,9 @@ const votes = [
 ];
 
 const Index = () => {
-  const [filter, setFilter] = useState(null);
+  const [filter, setFilter] = useState([]);
 
-  const filteredVotes = filter ? votes.filter((vote) => vote.type === filter) : votes;
+  const filteredVotes = filter.length > 0 ? votes.filter((vote) => filter.includes(vote.type)) : votes;
 
   return (
     <Box maxWidth="400px" mx="auto" p={4}>
@@ -23,9 +23,9 @@ const Index = () => {
       </Heading>
 
       <HStack justify="center" mb={8}>
-        <IconButton icon={<FaHeart />} aria-label="Filter by Love" onClick={() => setFilter(filter === "love" ? null : "love")} variant={filter === "love" ? "solid" : "outline"} colorScheme="red" />
-        <IconButton icon={<FaThumbsUp />} aria-label="Filter by Like" onClick={() => setFilter(filter === "like" ? null : "like")} variant={filter === "like" ? "solid" : "outline"} colorScheme="blue" />
-        <IconButton icon={<FaThumbsDown />} aria-label="Filter by Dislike" onClick={() => setFilter(filter === "dislike" ? null : "dislike")} variant={filter === "dislike" ? "solid" : "outline"} colorScheme="blue" />
+        <IconButton icon={<FaHeart />} aria-label="Filter by Love" onClick={() => setFilter(filter.includes("love") ? filter.filter((f) => f !== "love") : [...filter, "love"])} variant={filter.includes("love") ? "solid" : "outline"} colorScheme="red" />
+        <IconButton icon={<FaThumbsUp />} aria-label="Filter by Like" onClick={() => setFilter(filter.includes("like") ? filter.filter((f) => f !== "like") : [...filter, "like"])} variant={filter.includes("like") ? "solid" : "outline"} colorScheme="blue" />
+        <IconButton icon={<FaThumbsDown />} aria-label="Filter by Dislike" onClick={() => setFilter(filter.includes("dislike") ? filter.filter((f) => f !== "dislike") : [...filter, "dislike"])} variant={filter.includes("dislike") ? "solid" : "outline"} colorScheme="blue" />
       </HStack>
 
       <VStack spacing={4} align="stretch">
