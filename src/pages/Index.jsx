@@ -24,7 +24,7 @@ const Index = () => {
 
       <HStack justify="center" mb={8}>
         <IconButton icon={<FaHeart />} aria-label="Filter by Love" onClick={() => setFilter(filter === "love" ? null : "love")} variant={filter === "love" ? "solid" : "outline"} colorScheme="red" />
-        <IconButton icon={<FaThumbsUp />} aria-label="Filter by Like" onClick={() => setFilter(filter === "like" ? null : "like")} variant={filter === "like" ? "solid" : "outline"} colorScheme="green" />
+        <IconButton icon={<FaThumbsUp />} aria-label="Filter by Like" onClick={() => setFilter(filter === "like" ? null : "like")} variant={filter === "like" ? "solid" : "outline"} colorScheme="blue" />
         <IconButton icon={<FaThumbsDown />} aria-label="Filter by Dislike" onClick={() => setFilter(filter === "dislike" ? null : "dislike")} variant={filter === "dislike" ? "solid" : "outline"} colorScheme="blue" />
       </HStack>
 
