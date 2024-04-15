@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Box, Heading, Text, VStack, HStack, IconButton, Divider } from "@chakra-ui/react";
-import { FaHeart, FaThumbsUp, FaThumbsDown } from "react-icons/fa";
+import { Box, Heading, Text, VStack, Button } from "@chakra-ui/react";
+import FilterModal from "../components/FilterModal.jsx";
 
 const votes = [
   { id: 1, name: "Vote 1", type: "love" },
@@ -12,6 +12,7 @@ const votes = [
 ];
 
 const Index = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const [filter, setFilter] = useState([]);
 
   const filteredVotes = filter.length > 0 ? votes.filter((vote) => filter.includes(vote.type)) : votes;
@@ -22,11 +23,10 @@ const Index = () => {
         Vote List
       </Heading>
 
-      <HStack justify="center" mb={8}>
-        <IconButton icon={<FaHeart />} aria-label="Filter by Love" onClick={() => setFilter(filter.includes("love") ? filter.filter((f) => f !== "love") : [...filter, "love"])} variant={filter.includes("love") ? "solid" : "outline"} colorScheme="red" />
-        <IconButton icon={<FaThumbsUp />} aria-label="Filter by Like" onClick={() => setFilter(filter.includes("like") ? filter.filter((f) => f !== "like") : [...filter, "like"])} variant={filter.includes("like") ? "solid" : "outline"} colorScheme="blue" />
-        <IconButton icon={<FaThumbsDown />} aria-label="Filter by Dislike" onClick={() => setFilter(filter.includes("dislike") ? filter.filter((f) => f !== "dislike") : [...filter, "dislike"])} variant={filter.includes("dislike") ? "solid" : "outline"} colorScheme="blue" />
-      </HStack>
+      <Button onClick={() => setIsOpen(true)} mb={8}>
+        Filter
+      </Button>
+      <FilterModal isOpen={isOpen} onClose={() => setIsOpen(false)} filter={filter} setFilter={setFilter} />
 
       <VStack spacing={4} align="stretch">
         {filteredVotes.map((vote) => (
