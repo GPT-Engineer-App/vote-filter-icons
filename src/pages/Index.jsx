@@ -60,7 +60,7 @@ const Index = () => {
               <Text fontSize="lg" fontWeight="bold">
                 {vote.name}
               </Text>
-              <Text fontSize="sm" color="gray.500" textTransform="uppercase">
+              <Text fontSize="sm" textTransform="uppercase" color={vote.type === "love" ? "red.500" : vote.type === "like" ? "green.500" : "blue.500"}>
                 {vote.type}
               </Text>
             </Box>
