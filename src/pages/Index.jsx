@@ -31,12 +31,14 @@ const Index = () => {
 
       <VStack spacing={4} align="stretch">
         {filteredVotes.map((vote) => (
-          <Box key={vote.id} p={4} borderWidth={1} borderRadius="md" display="flex" alignItems="center">
-            <PuppyImage />
-            <Text fontSize="lg">{vote.name}</Text>
-            <Text fontSize="sm" color="gray.500">
-              {vote.type}
-            </Text>
+          <Box key={vote.id} p={4} borderWidth={1} borderRadius="lg" boxShadow="md" display="flex" alignItems="center" bg="white">
+            <PuppyImage mr={4} />
+            <Box>
+              <Text fontSize="lg" fontWeight="bold">{vote.name}</Text>
+              <Text fontSize="sm" color="gray.500" textTransform="uppercase">
+                {vote.type}
+              </Text>
+            </Box>
           </Box>
         ))}
       </VStack>
