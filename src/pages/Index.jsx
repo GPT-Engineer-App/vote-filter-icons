@@ -55,7 +55,7 @@ const Index = () => {
       <VStack spacing={4} align="stretch">
         {filteredVotes.map((vote, index) => (
           <Box key={vote.id} p={4} borderWidth={1} borderRadius="lg" boxShadow="md" display="flex" alignItems="center" bg="white">
-            <PuppyImage imageUrl={vote.imageUrl} mr={4} />
+            <PuppyImage imageUrl={vote.imageUrl} mr={10} />
             <Box>
               <Text fontSize="lg" fontWeight="bold">
                 {vote.name}
