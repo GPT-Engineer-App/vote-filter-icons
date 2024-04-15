@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Heading, Text, VStack, Button } from "@chakra-ui/react";
 import FilterModal from "../components/FilterModal.jsx";
 import PuppyImage from "../components/PuppyImage.jsx";
@@ -15,6 +15,26 @@ const votes = [
 const Index = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [filter, setFilter] = useState([]);
+  const [puppyImages, setPuppyImages] = useState([]);
+
+  useEffect(() => {
+    const fetchPuppyImages = async () => {
+      try {
+        const imageUrls = await Promise.all(
+          votes.map(async () => {
+            const response = await fetch("https://dog.ceo/api/breeds/image/random");
+            const data = await response.json();
+            return data.message;
+          }),
+        );
+        setPuppyImages(imageUrls);
+      } catch (error) {
+        console.error("Error fetching puppy images:", error);
+      }
+    };
+
+    fetchPuppyImages();
+  }, []);
 
   const filteredVotes = filter.length > 0 ? votes.filter((vote) => filter.includes(vote.type)) : votes;
 
@@ -30,11 +50,13 @@ const Index = () => {
       <FilterModal isOpen={isOpen} onClose={() => setIsOpen(false)} filter={filter} setFilter={setFilter} />
 
       <VStack spacing={4} align="stretch">
-        {filteredVotes.map((vote) => (
+        {filteredVotes.map((vote, index) => (
           <Box key={vote.id} p={4} borderWidth={1} borderRadius="lg" boxShadow="md" display="flex" alignItems="center" bg="white">
-            <PuppyImage mr={4} />
+            <PuppyImage imageUrl={puppyImages[index]} mr={4} />
             <Box>
-              <Text fontSize="lg" fontWeight="bold">{vote.name}</Text>
+              <Text fontSize="lg" fontWeight="bold">
+                {vote.name}
+              </Text>
               <Text fontSize="sm" color="gray.500" textTransform="uppercase">
                 {vote.type}
               </Text>
