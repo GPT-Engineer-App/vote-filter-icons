@@ -20,7 +20,7 @@ const Index = () => {
   return (
     <Box maxWidth="400px" mx="auto" p={4}>
       <Heading as="h1" size="xl" textAlign="center" mb={8}>
-        Vote List
+        Vote App
       </Heading>
 
       <Button onClick={() => setIsOpen(true)} mb={8}>
