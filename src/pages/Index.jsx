@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Heading, Text, VStack, Button } from "@chakra-ui/react";
 import FilterModal from "../components/FilterModal.jsx";
+import PuppyImage from "../components/PuppyImage.jsx";
 
 const votes = [
   { id: 1, name: "Vote 1", type: "love" },
@@ -30,7 +31,8 @@ const Index = () => {
 
       <VStack spacing={4} align="stretch">
         {filteredVotes.map((vote) => (
-          <Box key={vote.id} p={4} borderWidth={1} borderRadius="md">
+          <Box key={vote.id} p={4} borderWidth={1} borderRadius="md" display="flex" alignItems="center">
+            <PuppyImage />
             <Text fontSize="lg">{vote.name}</Text>
             <Text fontSize="sm" color="gray.500">
               {vote.type}
